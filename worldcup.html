@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIFA World Cup 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: white;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: glow-pulse 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(126, 34, 206, 0.15) 0%, transparent 70%);
+            animation: glow-pulse 10s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        nav a {
+            color: #ffd700;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            border: 2px solid transparent;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+            transform: scale(1.05);
+        }
+
+        /* Animated background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 165, 0, 0.6), 0 0 90px rgba(255, 215, 0, 0.4);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 165, 0, 0.4);
+            }
+            50% {
+                text-shadow: 0 0 40px rgba(255, 215, 0, 1), 0 0 80px rgba(255, 165, 0, 0.8);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #ffd700;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% { transform: translate(-100%, -100%) rotate(45deg); }
+            100% { transform: translate(100%, 100%) rotate(45deg); }
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.4);
+            border-color: rgba(255, 215, 0, 0.8);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .card h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .card p {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+
+        .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        button {
+            background: linear-gradient(135deg, #ffd700, #ffa500);
+            border: none;
+            color: #1e3c72;
+            padding: 12px 30px;
+            font-size: 1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 5;
+            color: #ffd700;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="starsContainer"></div>
+
+    <nav>
+        <a href="worldcup.html" class="active">🏠 Home</a>
+        <a href="teams.html">🌍 Teams</a>
+        <a href="players.html">⭐ Players</a>
+        <a href="schedule.html">📅 Schedule</a>
+        <a href="stats.html">📊 Stats</a>
+        <a href="gallery.html">🎨 Gallery</a>
+        <a href="shop.html">🛍️ Shop</a>
+    </nav>
+
+    <header>
+        <a href="worldcup.html" style="text-decoration: none; color: #ffd700; font-size: 2.5em; margin-right: 20px;">🏆</a>
+        <h1>⚽ FIFA WORLD CUP 2026 ⚽</h1>
+        <p class="subtitle">The Most Prestigious Football Tournament</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="icon">🏆</div>
+            <h2>Tournament Info</h2>
+            <p>Experience the ultimate football competition featuring 32 teams from around the world competing for glory and the golden trophy.</p>
+            <button onclick="alert('Hosted in USA, Mexico & Canada!')">Learn More</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌍</div>
+            <h2>Global Event</h2>
+            <p>Watch billions of fans worldwide unite in celebrating the beautiful game. From iconic stadiums to passionate supporters.</p>
+            <button onclick="alert('Billions watching worldwide!')">Explore</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">⭐</div>
+            <h2>Top Players</h2>
+            <p>The world's greatest athletes showcase their talent including Messi, Ronaldo, and emerging football superstars.</p>
+            <button onclick="alert('Coming soon: Player profiles!')">View Players</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎯</div>
+            <h2>Live Matches</h2>
+            <p>Follow intense matches with real-time scores, statistics, and thrilling moments from groups to finals.</p>
+            <button onclick="alert('Live tracking available!')">Watch Now</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎉</div>
+            <h2>Fan Experience</h2>
+            <p>Join the excitement with interactive polls, predictions, and connect with fans from across the globe.</p>
+            <button onclick="alert('Community engaged!')">Join Us</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">🥇</div>
+            <h2>History Making</h2>
+            <p>Witness legendary moments and record-breaking performances as nations battle for the ultimate prize.</p>
+            <button onclick="alert('Legacy being written!')">Celebrate</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>⚽ 2026 FIFA World Cup - Official Fan Experience ⚽</p>
+    </div>
+
+    <script>
+        // Generate random stars
+        function createStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        createStars();
+
+        // Interactive card effects
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.animation = 'pulse 0.5s ease';
+            });
+        });
+    </script>
+</body>
+</html>
